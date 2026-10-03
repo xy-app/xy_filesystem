@@ -1,0 +1,466 @@
+{
+  "plugin_id": "xy_filesystem",
+  "name": "文件与压缩包管理 (File & Archive)",
+  "version": "0.51.0",
+  "group": "Filesystem",
+  "group_icon": "📁",
+  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "actions": [
+    {
+      "tag": "CompressFile",
+      "display_name": "压缩/解压归档文件 (CompressFile)",
+      "icon": "🗜️",
+      "platforms": "All",
+      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压",
+      "keywords": [
+        "filesystem",
+        "compress",
+        "decompress",
+        "zip",
+        "tar",
+        "压缩",
+        "解压"
+      ],
+      "fields": [
+        {
+          "name": "source",
+          "display_name": "源文件/源目录",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "待处理的源路径"
+        },
+        {
+          "name": "destination",
+          "display_name": "目标路径",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "解压输出目录或输出归档路径"
+        },
+        {
+          "name": "filename",
+          "display_name": "归档文件名称",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "archive.zip",
+          "presets": [
+            "archive.zip",
+            "archive.tar.gz"
+          ],
+          "description": "压缩包文件名称"
+        },
+        {
+          "name": "format",
+          "display_name": "归档格式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "zip",
+          "presets": [
+            "zip",
+            "tar",
+            "tar.gz"
+          ],
+          "description": "压缩格式"
+        },
+        {
+          "name": "level",
+          "display_name": "压缩等级",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "6",
+          "presets": [
+            "0",
+            "1",
+            "6",
+            "9"
+          ],
+          "description": "压缩级别 (0-9)"
+        },
+        {
+          "name": "password",
+          "display_name": "加密密码",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "加密保护密码（若有）"
+        },
+        {
+          "name": "overwrite",
+          "display_name": "覆盖已存在文件",
+          "intrinsic_type": "bool",
+          "default_type": "bool",
+          "default_value": "true",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否允许覆盖"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "CopyFile",
+      "display_name": "复制文件/目录 (CopyFile)",
+      "icon": "📋",
+      "platforms": "All",
+      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置",
+      "keywords": [
+        "filesystem",
+        "copy",
+        "file",
+        "复制文件"
+      ],
+      "fields": [
+        {
+          "name": "from",
+          "display_name": "源文件路径",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "要复制的源文件"
+        },
+        {
+          "name": "to",
+          "display_name": "目标目录/文件",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "复制目的路径"
+        },
+        {
+          "name": "filename",
+          "display_name": "重命名新文件名",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "目标文件名，留空保留原名"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "DirectoryIterator",
+      "display_name": "遍历目录文件 (DirectoryIterator)",
+      "icon": "📂",
+      "platforms": "All",
+      "description": "遍历扫描指定文件夹下的所有文件和子目录列表",
+      "keywords": [
+        "filesystem",
+        "directory",
+        "iterate",
+        "list",
+        "遍历目录"
+      ],
+      "fields": [
+        {
+          "name": "path",
+          "display_name": "文件夹路径",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "目标目录"
+        },
+        {
+          "name": "recursive",
+          "display_name": "递归查找子目录",
+          "intrinsic_type": "bool",
+          "default_type": "bool",
+          "default_value": "false",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否遍历深层目录"
+        },
+        {
+          "name": "extensions",
+          "display_name": "扩展名过滤",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "*",
+          "presets": [
+            "*",
+            "txt",
+            "png,jpg",
+            "csv"
+          ],
+          "description": "文件后缀过滤"
+        },
+        {
+          "name": "async",
+          "display_name": "异步遍历模式",
+          "intrinsic_type": "bool",
+          "default_type": "bool",
+          "default_value": "false",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否在后台异步遍历"
+        }
+      ],
+      "output_type": "Array"
+    },
+    {
+      "tag": "FileQuery",
+      "display_name": "查询文件属性/匹配 (FileQuery)",
+      "icon": "🔎",
+      "platforms": "All",
+      "description": "检查指定文件是否存在、查询文件大小和最后修改时间",
+      "keywords": [
+        "filesystem",
+        "query",
+        "exist",
+        "size",
+        "文件查询"
+      ],
+      "fields": [
+        {
+          "name": "pattern",
+          "display_name": "文件路径或匹配规则",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "路径或通配符表达式"
+        },
+        {
+          "name": "option",
+          "display_name": "查询类型",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "exists",
+          "presets": [
+            "exists",
+            "size",
+            "is_dir",
+            "is_file"
+          ],
+          "description": "查询属性类型"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "FileRead",
+      "display_name": "读取完整文件 (FileRead)",
+      "icon": "📖",
+      "platforms": "All",
+      "description": "读取指定文件的全部内容为文本或二进制数据",
+      "keywords": [
+        "filesystem",
+        "read",
+        "file",
+        "读取文件"
+      ],
+      "fields": [
+        {
+          "name": "file",
+          "display_name": "文件路径",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "目标读取文件"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "FileWrite",
+      "display_name": "写入文件内容 (FileWrite)",
+      "icon": "💾",
+      "platforms": "All",
+      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入",
+      "keywords": [
+        "filesystem",
+        "write",
+        "file",
+        "写入文件"
+      ],
+      "fields": [
+        {
+          "name": "folder",
+          "display_name": "存储目录",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输出目录路径"
+        },
+        {
+          "name": "filename",
+          "display_name": "文件名称",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "output.txt",
+          "presets": [
+            "output.txt",
+            "log.txt"
+          ],
+          "description": "文件名"
+        },
+        {
+          "name": "source",
+          "display_name": "写入数据内容",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "待写入的数据"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "ImageLoad",
+      "display_name": "加载图像数据 (ImageLoad)",
+      "icon": "📥",
+      "platforms": "All",
+      "description": "从电脑本地磁盘快速读取并打开图片文件",
+      "keywords": [
+        "filesystem",
+        "image",
+        "load",
+        "加载图片"
+      ],
+      "fields": [
+        {
+          "name": "file",
+          "display_name": "图片文件路径",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "图像文件路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ImageSave",
+      "display_name": "保存图像文件 (ImageSave)",
+      "icon": "📤",
+      "platforms": "All",
+      "description": "将当前内存中的图片保存到本地磁盘文件中",
+      "keywords": [
+        "filesystem",
+        "image",
+        "save",
+        "保存图片"
+      ],
+      "fields": [
+        {
+          "name": "folder",
+          "display_name": "存储目录",
+          "intrinsic_type": "DirectoryPicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "目标保存目录"
+        },
+        {
+          "name": "filename",
+          "display_name": "文件名称",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "screenshot.png",
+          "presets": [
+            "screenshot.png",
+            "capture.jpg"
+          ],
+          "description": "输出图像文件名"
+        },
+        {
+          "name": "image",
+          "display_name": "图像对象引用",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "上游生成的 Image 对象"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "ReadLines",
+      "display_name": "按行读取文本 (ReadLines)",
+      "icon": "📜",
+      "platforms": "All",
+      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理",
+      "keywords": [
+        "filesystem",
+        "read",
+        "lines",
+        "按行读取"
+      ],
+      "fields": [
+        {
+          "name": "file",
+          "display_name": "文本文件路径",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "目标文件路径"
+        },
+        {
+          "name": "async",
+          "display_name": "异步读取模式",
+          "intrinsic_type": "bool",
+          "default_type": "bool",
+          "default_value": "false",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否后台异步读取"
+        }
+      ],
+      "output_type": "Array"
+    },
+    {
+      "tag": "StandardPath",
+      "display_name": "获取系统标准路径 (StandardPath)",
+      "icon": "📍",
+      "platforms": "All",
+      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径",
+      "keywords": [
+        "filesystem",
+        "path",
+        "standard",
+        "desktop",
+        "documents",
+        "系统路径"
+      ],
+      "fields": [
+        {
+          "name": "value",
+          "display_name": "标准目录类型",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Desktop",
+          "presets": [
+            "Desktop",
+            "Documents",
+            "Downloads",
+            "AppData",
+            "Temp"
+          ],
+          "description": "已知标准目录类型"
+        }
+      ],
+      "output_type": "string"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "文件与压缩包管理 (File & Archive)",
+  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "group": "Système de fichiers",
+  "actions": {
+    "CompressFile": {
+      "display_name": "Compresser fichier (CompressFile)",
+      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+    },
+    "CopyFile": {
+      "display_name": "Copier fichier (CopyFile)",
+      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+    },
+    "DirectoryIterator": {
+      "display_name": "Parcourir dossier (DirectoryIterator)",
+      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+    },
+    "FileQuery": {
+      "display_name": "Interroger fichier (FileQuery)",
+      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+    },
+    "FileRead": {
+      "display_name": "Lire fichier (FileRead)",
+      "description": "读取指定文件的全部内容为文本或二进制数据"
+    },
+    "FileWrite": {
+      "display_name": "Écrire fichier (FileWrite)",
+      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+    },
+    "ImageLoad": {
+      "display_name": "Charger image (ImageLoad)",
+      "description": "从电脑本地磁盘快速读取并打开图片文件"
+    },
+    "ImageSave": {
+      "display_name": "Enregistrer image (ImageSave)",
+      "description": "将当前内存中的图片保存到本地磁盘文件中"
+    },
+    "ReadLines": {
+      "display_name": "Lire ligne par ligne (ReadLines)",
+      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+    },
+    "StandardPath": {
+      "display_name": "Chemin standard (StandardPath)",
+      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+    }
+  }
+}
