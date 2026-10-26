@@ -1,47 +1,71 @@
 {
-  "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "name": "Datei- & Archivverwaltung",
+  "description": "Bietet Datei- und Ordnererstellung, Kopieren, Verschieben, Papierkorblöschung, Sperrprüfung, Text-E/A, 7z/Zip-Archivierung und Ordnerüberwachung.",
   "group": "Dateisystem",
   "actions": {
     "CompressFile": {
       "display_name": "Datei komprimieren (CompressFile)",
-      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+      "description": "Komprimieren oder Entpacken von Dateien und Verzeichnissen im Zip-, 7z- oder Tar-Format."
     },
     "CopyFile": {
       "display_name": "Datei kopieren (CopyFile)",
-      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+      "description": "Kopiert eine einzelne Datei oder ein gesamtes Verzeichnis rekursiv."
+    },
+    "CreateFolder": {
+      "display_name": "Ordner erstellen (CreateFolder)",
+      "description": "Erstellt rekursiv ein neues Verzeichnis mit optionaler Bereinigung."
+    },
+    "DeleteFile": {
+      "display_name": "Datei löschen (DeleteFile)",
+      "description": "Verschiebt Dateien oder Ordner sicher in den Papierkorb oder löscht sie dauerhaft."
     },
     "DirectoryIterator": {
       "display_name": "Verzeichnis durchlaufen (DirectoryIterator)",
-      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+      "description": "Durchsucht Dateien und Unterverzeichnisse mit Erweiterungsfilter."
+    },
+    "FileLock": {
+      "display_name": "Dateisperre prüfen (FileLock)",
+      "description": "Prüft, ob eine Datei durch externe Programme wie Excel gesperrt ist, mit Timeout."
     },
     "FileQuery": {
       "display_name": "Datei abfragen (FileQuery)",
-      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+      "description": "Prüft Dateiexistenz, Dateigröße, Verzeichnisstatus und Änderungsdatum."
     },
     "FileRead": {
       "display_name": "Datei lesen (FileRead)",
-      "description": "读取指定文件的全部内容为文本或二进制数据"
+      "description": "Liest den gesamten Text- oder Binärinhalt einer Datei vom Datenträger."
     },
     "FileWrite": {
       "display_name": "Datei schreiben (FileWrite)",
-      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+      "description": "Speichert Text- oder Binärdaten in einer Datei auf der Festplatte."
     },
     "ImageLoad": {
       "display_name": "Bild laden (ImageLoad)",
-      "description": "从电脑本地磁盘快速读取并打开图片文件"
+      "description": "Lädt Bilddateien vom lokalen Datenträger in Speicher-Bildobjekte."
     },
     "ImageSave": {
       "display_name": "Bild speichern (ImageSave)",
-      "description": "将当前内存中的图片保存到本地磁盘文件中"
+      "description": "Speichert Bildobjekte auf der Festplatte oder exportiert sie direkt als PDF."
+    },
+    "MoveFile": {
+      "display_name": "Datei verschieben (MoveFile)",
+      "description": "Verschiebt oder benennt Dateien und Ordner laufwerksübergreifend um."
     },
     "ReadLines": {
       "display_name": "Zeilenweise lesen (ReadLines)",
-      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+      "description": "Liest große Textdateien zeilenweise in eine Zeilenliste ein."
     },
     "StandardPath": {
       "display_name": "Standardpfad (StandardPath)",
-      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+      "description": "Ermittelt Systemverzeichnisse wie Desktop, Dokumente, Downloads, AppData und Temp."
+    },
+    "TempFile": {
+      "display_name": "Temporäre Datei erstellen (TempFile)",
+      "description": "Erzeugt eine eindeutige temporäre Datei oder ein Verzeichnis im Temp-Ordner."
+    },
+    "WatchFolder": {
+      "display_name": "Ordner überwachen (WatchFolder)",
+      "description": "Überwacht Ordneränderungen (Erstellung, Änderung, Löschung) in Echtzeit."
     }
   }
 }

@@ -1,47 +1,71 @@
 {
-  "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "name": "파일 및 압축 파일 관리",
+  "description": "파일/폴더 생성, 복사, 이동, 휴지통 안전 삭제, 점유 잠금 확인, 대용량 텍스트 읽기/쓰기, 7z/Zip 압축/풀기 및 폴더 모니터링 기능을 제공합니다.",
   "group": "파일 시스템",
   "actions": {
     "CompressFile": {
       "display_name": "파일 압축 (CompressFile)",
-      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+      "description": "Zip, 7z, Tar 형식으로 파일이나 폴더를 압축하거나 압축을 해제합니다."
     },
     "CopyFile": {
       "display_name": "파일 복사 (CopyFile)",
-      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+      "description": "단일 파일 또는 전체 폴더 구조를 복사합니다."
+    },
+    "CreateFolder": {
+      "display_name": "폴더 생성 (CreateFolder)",
+      "description": "지정한 경로에 새 폴더를 재귀적으로 생성합니다 (기존 콘텐츠 비우기 옵션 지원)."
+    },
+    "DeleteFile": {
+      "display_name": "파일 삭제 (DeleteFile)",
+      "description": "파일 또는 폴더를 안전하게 휴지통으로 이동하거나 영구 삭제합니다."
     },
     "DirectoryIterator": {
       "display_name": "디렉터리 탐색 (DirectoryIterator)",
-      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+      "description": "확장자 필터를 적용하여 폴더 내 파일 및 하위 디렉터리 목록을 스캔합니다."
+    },
+    "FileLock": {
+      "display_name": "파일 사용 중 확인 (FileLock)",
+      "description": "Excel, Word 등 외부 프로세스에 의한 파일 독점 잠금 상태를 감지하고 해제를 대기합니다."
     },
     "FileQuery": {
       "display_name": "파일 정보 확인 (FileQuery)",
-      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+      "description": "파일 존재 여부, 파일 크기, 디렉터리 여부, 수정 시간을 확인합니다."
     },
     "FileRead": {
       "display_name": "파일 읽기 (FileRead)",
-      "description": "读取指定文件的全部内容为文本或二进制数据"
+      "description": "파일의 전체 내용을 텍스트 또는 바이너리 데이터로 읽어옵니다."
     },
     "FileWrite": {
       "display_name": "파일 쓰기 (FileWrite)",
-      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+      "description": "텍스트나 바이너리 데이터를 파일에 저장합니다."
     },
     "ImageLoad": {
       "display_name": "이미지 로드 (ImageLoad)",
-      "description": "从电脑本地磁盘快速读取并打开图片文件"
+      "description": "디스크에서 이미지 파일을 읽어 메모리 이미지 객체로 변환합니다."
     },
     "ImageSave": {
       "display_name": "이미지 저장 (ImageSave)",
-      "description": "将当前内存中的图片保存到本地磁盘文件中"
+      "description": "메모리 이미지 객체를 디스크에 저장하거나 PDF로 직접 출력합니다."
+    },
+    "MoveFile": {
+      "display_name": "파일 이동 (MoveFile)",
+      "description": "파일이나 폴더를 다른 디렉터리로 이동하거나 이름을 변경합니다."
     },
     "ReadLines": {
       "display_name": "줄 단위 읽기 (ReadLines)",
-      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+      "description": "대용량 텍스트 파일을 한 줄씩 분할하여 리스트 배열로 읽어옵니다."
     },
     "StandardPath": {
       "display_name": "표준 시스템 경로 (StandardPath)",
-      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+      "description": "바탕화면, 문서, 다운로드, AppData, Temp 등 시스템 표준 경로를 가져옵니다."
+    },
+    "TempFile": {
+      "display_name": "임시 파일 생성 (TempFile)",
+      "description": "시스템 임시 디렉터리에 고유한 이름의 임시 파일이나 폴더를 생성합니다."
+    },
+    "WatchFolder": {
+      "display_name": "폴더 모니터링 (WatchFolder)",
+      "description": "폴더 내 파일 생성, 변경, 삭제 이벤트를 실시간으로 감시합니다."
     }
   }
 }

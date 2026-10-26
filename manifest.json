@@ -1,10 +1,10 @@
 {
   "plugin_id": "xy_filesystem",
   "name": "文件与压缩包管理 (File & Archive)",
-  "version": "0.51.0",
+  "version": "0.53.0",
   "group": "Filesystem",
   "group_icon": "📁",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "description": "提供文件与文件夹的新建、复制、移动、安全删除/回收站、占用检测、大文本读写、7z/Zip 打包解压及文件夹监视功能",
   "actions": [
     {
       "tag": "CompressFile",
@@ -25,8 +25,10 @@
         {
           "name": "source",
           "display_name": "源文件/源目录",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "源与目标",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "待处理的源路径"
@@ -34,8 +36,10 @@
         {
           "name": "destination",
           "display_name": "目标路径",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "源与目标",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "解压输出目录或输出归档路径"
@@ -43,8 +47,9 @@
         {
           "name": "filename",
           "display_name": "归档文件名称",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "group": "压缩参数",
+          "default_type": "String",
           "default_value": "archive.zip",
           "presets": [
             "archive.zip",
@@ -55,8 +60,9 @@
         {
           "name": "format",
           "display_name": "归档格式",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "Enum",
+          "group": "压缩参数",
+          "default_type": "String",
           "default_value": "zip",
           "presets": [
             "zip",
@@ -68,8 +74,10 @@
         {
           "name": "level",
           "display_name": "压缩等级",
-          "intrinsic_type": "number",
-          "default_type": "number",
+          "intrinsic_type": "Integer",
+          "group": "高级选项",
+          "is_advanced": true,
+          "default_type": "Number",
           "default_value": "6",
           "presets": [
             "0",
@@ -82,8 +90,10 @@
         {
           "name": "password",
           "display_name": "加密密码",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "Password",
+          "group": "高级选项",
+          "is_advanced": true,
+          "default_type": "Password",
           "default_value": "",
           "presets": [],
           "description": "加密保护密码（若有）"
@@ -91,8 +101,10 @@
         {
           "name": "overwrite",
           "display_name": "覆盖已存在文件",
-          "intrinsic_type": "bool",
-          "default_type": "bool",
+          "intrinsic_type": "Boolean",
+          "group": "高级选项",
+          "is_advanced": true,
+          "default_type": "Boolean",
           "default_value": "true",
           "presets": [
             "true",
@@ -119,8 +131,10 @@
         {
           "name": "from",
           "display_name": "源文件路径",
-          "intrinsic_type": "FilePicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "路径设置",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "要复制的源文件"
@@ -128,8 +142,10 @@
         {
           "name": "to",
           "display_name": "目标目录/文件",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "路径设置",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "复制目的路径"
@@ -137,11 +153,109 @@
         {
           "name": "filename",
           "display_name": "重命名新文件名",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "group": "高级选项",
+          "is_advanced": true,
+          "default_type": "String",
           "default_value": "",
           "presets": [],
           "description": "目标文件名，留空保留原名"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "CreateFolder",
+      "display_name": "创建文件夹 (CreateFolder)",
+      "icon": "📁",
+      "platforms": "All",
+      "description": "递归新建指定的文件夹路径，支持已存在时自动清空内部文件选项",
+      "keywords": [
+        "filesystem",
+        "folder",
+        "create",
+        "mkdir",
+        "创建文件夹"
+      ],
+      "fields": [
+        {
+          "name": "path",
+          "display_name": "文件夹路径",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "目录路径",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "目标创建路径"
+        },
+        {
+          "name": "clean_if_exists",
+          "display_name": "已存在时清空",
+          "intrinsic_type": "Boolean",
+          "group": "创建选项",
+          "default_type": "Boolean",
+          "default_value": "false",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "若文件夹已存在是否清空"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "DeleteFile",
+      "display_name": "删除文件/目录 (DeleteFile)",
+      "icon": "🗑️",
+      "platforms": "All",
+      "description": "安全删除指定文件或文件夹，默认移入系统回收站（支持强力彻底粉碎）",
+      "keywords": [
+        "filesystem",
+        "delete",
+        "remove",
+        "trash",
+        "recycle",
+        "删除文件"
+      ],
+      "fields": [
+        {
+          "name": "path",
+          "display_name": "文件/目录路径",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "文件与目录",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "目标删除路径"
+        },
+        {
+          "name": "recycle_bin",
+          "display_name": "移入回收站",
+          "intrinsic_type": "Boolean",
+          "group": "删除策略",
+          "default_type": "Boolean",
+          "default_value": "true",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否安全移入回收站"
+        },
+        {
+          "name": "recursive",
+          "display_name": "递归删除目录",
+          "intrinsic_type": "Boolean",
+          "group": "删除策略",
+          "default_type": "Boolean",
+          "default_value": "true",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否包含子项彻底删除"
         }
       ],
       "output_type": "bool"
@@ -163,8 +277,10 @@
         {
           "name": "path",
           "display_name": "文件夹路径",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "遍历配置",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "目标目录"
@@ -172,8 +288,9 @@
         {
           "name": "recursive",
           "display_name": "递归查找子目录",
-          "intrinsic_type": "bool",
-          "default_type": "bool",
+          "intrinsic_type": "Boolean",
+          "group": "遍历配置",
+          "default_type": "Boolean",
           "default_value": "false",
           "presets": [
             "true",
@@ -184,8 +301,9 @@
         {
           "name": "extensions",
           "display_name": "扩展名过滤",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "Enum",
+          "group": "过滤规则",
+          "default_type": "String",
           "default_value": "*",
           "presets": [
             "*",
@@ -198,8 +316,10 @@
         {
           "name": "async",
           "display_name": "异步遍历模式",
-          "intrinsic_type": "bool",
-          "default_type": "bool",
+          "intrinsic_type": "Boolean",
+          "group": "高级模式",
+          "is_advanced": true,
+          "default_type": "Boolean",
           "default_value": "false",
           "presets": [
             "true",
@@ -209,6 +329,49 @@
         }
       ],
       "output_type": "Array"
+    },
+    {
+      "tag": "FileLock",
+      "display_name": "文件占用检测 (FileLock)",
+      "icon": "🔓",
+      "platforms": "All",
+      "description": "检测文件是否正被 Excel、Word 或其他外部进程独占锁定，支持超时等待解锁",
+      "keywords": [
+        "filesystem",
+        "file",
+        "lock",
+        "busy",
+        "check",
+        "文件占用"
+      ],
+      "fields": [
+        {
+          "name": "file",
+          "display_name": "文件路径",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "检测文件",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "检测目标文件"
+        },
+        {
+          "name": "timeout_ms",
+          "display_name": "超时等待 (毫秒)",
+          "intrinsic_type": "Integer",
+          "group": "超时设置",
+          "default_type": "Number",
+          "default_value": "3000",
+          "presets": [
+            "1000",
+            "3000",
+            "5000"
+          ],
+          "description": "等待解锁的最大毫秒数"
+        }
+      ],
+      "output_type": "bool"
     },
     {
       "tag": "FileQuery",
@@ -227,8 +390,10 @@
         {
           "name": "pattern",
           "display_name": "文件路径或匹配规则",
-          "intrinsic_type": "FilePicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "查询目标",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "路径或通配符表达式"
@@ -236,14 +401,17 @@
         {
           "name": "option",
           "display_name": "查询类型",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "Enum",
+          "required": true,
+          "group": "查询目标",
+          "default_type": "String",
           "default_value": "exists",
           "presets": [
             "exists",
             "size",
             "is_dir",
-            "is_file"
+            "is_file",
+            "modified_time"
           ],
           "description": "查询属性类型"
         }
@@ -266,8 +434,10 @@
         {
           "name": "file",
           "display_name": "文件路径",
-          "intrinsic_type": "FilePicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "文件路径",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "目标读取文件"
@@ -291,8 +461,10 @@
         {
           "name": "folder",
           "display_name": "存储目录",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "存储目标",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "输出目录路径"
@@ -300,8 +472,10 @@
         {
           "name": "filename",
           "display_name": "文件名称",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "required": true,
+          "group": "存储目标",
+          "default_type": "String",
           "default_value": "output.txt",
           "presets": [
             "output.txt",
@@ -312,8 +486,10 @@
         {
           "name": "source",
           "display_name": "写入数据内容",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "required": true,
+          "group": "数据内容",
+          "default_type": "String",
           "default_value": "",
           "presets": [],
           "description": "待写入的数据"
@@ -337,8 +513,10 @@
         {
           "name": "file",
           "display_name": "图片文件路径",
-          "intrinsic_type": "FilePicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "图片路径",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "图像文件路径"
@@ -362,8 +540,10 @@
         {
           "name": "folder",
           "display_name": "存储目录",
-          "intrinsic_type": "DirectoryPicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "存储目标",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "目标保存目录"
@@ -371,8 +551,10 @@
         {
           "name": "filename",
           "display_name": "文件名称",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "required": true,
+          "group": "存储目标",
+          "default_type": "String",
           "default_value": "screenshot.png",
           "presets": [
             "screenshot.png",
@@ -383,11 +565,75 @@
         {
           "name": "image",
           "display_name": "图像对象引用",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "Image",
+          "required": true,
+          "group": "图像来源",
+          "default_type": "Image",
           "default_value": "",
           "presets": [],
           "description": "上游生成的 Image 对象"
+        }
+      ],
+      "output_type": "bool"
+    },
+    {
+      "tag": "MoveFile",
+      "display_name": "移动/重命名文件 (MoveFile)",
+      "icon": "✂️",
+      "platforms": "All",
+      "description": "将文件或文件夹移动到新目录或重命名，支持跨盘/跨卷移动",
+      "keywords": [
+        "filesystem",
+        "move",
+        "rename",
+        "cut",
+        "移动文件"
+      ],
+      "fields": [
+        {
+          "name": "from",
+          "display_name": "源文件路径",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "路径设置",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "源文件或文件夹"
+        },
+        {
+          "name": "to",
+          "display_name": "目标目录",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "路径设置",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "目的路径"
+        },
+        {
+          "name": "filename",
+          "display_name": "新文件名",
+          "intrinsic_type": "String",
+          "group": "移动控制",
+          "default_type": "String",
+          "default_value": "",
+          "presets": [],
+          "description": "新名称，留空保留原名"
+        },
+        {
+          "name": "overwrite",
+          "display_name": "覆盖已存在项",
+          "intrinsic_type": "Boolean",
+          "group": "移动控制",
+          "default_type": "Boolean",
+          "default_value": "true",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "已存在时是否允许覆盖"
         }
       ],
       "output_type": "bool"
@@ -408,8 +654,10 @@
         {
           "name": "file",
           "display_name": "文本文件路径",
-          "intrinsic_type": "FilePicker",
-          "default_type": "string",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "文件路径",
+          "default_type": "Path",
           "default_value": "",
           "presets": [],
           "description": "目标文件路径"
@@ -417,8 +665,10 @@
         {
           "name": "async",
           "display_name": "异步读取模式",
-          "intrinsic_type": "bool",
-          "default_type": "bool",
+          "intrinsic_type": "Boolean",
+          "group": "高级模式",
+          "is_advanced": true,
+          "default_type": "Boolean",
           "default_value": "false",
           "presets": [
             "true",
@@ -447,8 +697,10 @@
         {
           "name": "value",
           "display_name": "标准目录类型",
-          "intrinsic_type": "string",
-          "default_type": "string",
+          "intrinsic_type": "String",
+          "required": true,
+          "group": "目录类型",
+          "default_type": "String",
           "default_value": "Desktop",
           "presets": [
             "Desktop",
@@ -458,6 +710,121 @@
             "Temp"
           ],
           "description": "已知标准目录类型"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "TempFile",
+      "display_name": "创建临时文件/目录 (TempFile)",
+      "icon": "⚡",
+      "platforms": "All",
+      "description": "在系统临时目录下自动生成具备唯一名的临时文件或文件夹",
+      "keywords": [
+        "filesystem",
+        "temp",
+        "file",
+        "temporary",
+        "临时文件"
+      ],
+      "fields": [
+        {
+          "name": "prefix",
+          "display_name": "名称前缀",
+          "intrinsic_type": "String",
+          "group": "命名配置",
+          "default_type": "String",
+          "default_value": "xy_temp_",
+          "presets": [
+            "xy_temp_",
+            "run_"
+          ],
+          "description": "前缀字符串"
+        },
+        {
+          "name": "extension",
+          "display_name": "文件扩展名",
+          "intrinsic_type": "String",
+          "group": "命名配置",
+          "default_type": "String",
+          "default_value": "tmp",
+          "presets": [
+            "tmp",
+            "txt",
+            "json"
+          ],
+          "description": "创建文件时的扩展名"
+        },
+        {
+          "name": "is_directory",
+          "display_name": "创建临时文件夹",
+          "intrinsic_type": "Boolean",
+          "group": "类型控制",
+          "default_type": "Boolean",
+          "default_value": "false",
+          "presets": [
+            "true",
+            "false"
+          ],
+          "description": "是否为临时目录"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "WatchFolder",
+      "display_name": "监视文件夹变动 (WatchFolder)",
+      "icon": "👁️",
+      "platforms": "All",
+      "description": "实时监视文件夹中的文件新建、修改、删除等事件，支持超时阻断等待",
+      "keywords": [
+        "filesystem",
+        "watch",
+        "folder",
+        "notify",
+        "monitor",
+        "监视文件夹"
+      ],
+      "fields": [
+        {
+          "name": "path",
+          "display_name": "监视目录路径",
+          "intrinsic_type": "Path",
+          "required": true,
+          "group": "监视目标",
+          "default_type": "Path",
+          "default_value": "",
+          "presets": [],
+          "description": "监控的父目录"
+        },
+        {
+          "name": "event_type",
+          "display_name": "监听事件类型",
+          "intrinsic_type": "Enum",
+          "group": "监听规则",
+          "default_type": "String",
+          "default_value": "all",
+          "presets": [
+            "all",
+            "created",
+            "modified",
+            "deleted"
+          ],
+          "description": "事件过滤"
+        },
+        {
+          "name": "timeout_ms",
+          "display_name": "超时等待 (毫秒)",
+          "intrinsic_type": "Integer",
+          "group": "超时设置",
+          "default_type": "Number",
+          "default_value": "5000",
+          "presets": [
+            "1000",
+            "5000",
+            "10000"
+          ],
+          "description": "最长阻塞监听时间"
         }
       ],
       "output_type": "string"

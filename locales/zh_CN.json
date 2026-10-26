@@ -1,6 +1,6 @@
 {
   "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "description": "提供文件与文件夹的新建、复制、移动、安全删除/回收站、占用检测、大文本读写、7z/Zip 打包解压及文件夹监视功能",
   "group": "文件系统",
   "actions": {
     "CompressFile": {
@@ -11,9 +11,21 @@
       "display_name": "复制文件/目录 (CopyFile)",
       "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
     },
+    "CreateFolder": {
+      "display_name": "创建文件夹 (CreateFolder)",
+      "description": "递归新建指定的文件夹路径，支持已存在时自动清空内部文件选项"
+    },
+    "DeleteFile": {
+      "display_name": "删除文件/目录 (DeleteFile)",
+      "description": "安全删除指定文件或文件夹，默认移入系统回收站（支持强力彻底粉碎）"
+    },
     "DirectoryIterator": {
       "display_name": "遍历目录文件 (DirectoryIterator)",
       "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+    },
+    "FileLock": {
+      "display_name": "文件占用检测 (FileLock)",
+      "description": "检测文件是否正被 Excel、Word 或其他外部进程独占锁定，支持超时等待解锁"
     },
     "FileQuery": {
       "display_name": "查询文件属性/匹配 (FileQuery)",
@@ -35,6 +47,10 @@
       "display_name": "保存图像文件 (ImageSave)",
       "description": "将当前内存中的图片保存到本地磁盘文件中"
     },
+    "MoveFile": {
+      "display_name": "移动/重命名文件 (MoveFile)",
+      "description": "将文件或文件夹移动到新目录或重命名，支持跨盘/跨卷移动"
+    },
     "ReadLines": {
       "display_name": "按行读取文本 (ReadLines)",
       "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
@@ -42,6 +58,14 @@
     "StandardPath": {
       "display_name": "获取系统标准路径 (StandardPath)",
       "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+    },
+    "TempFile": {
+      "display_name": "创建临时文件/目录 (TempFile)",
+      "description": "在系统临时目录下自动生成具备唯一名的临时文件或文件夹"
+    },
+    "WatchFolder": {
+      "display_name": "监视文件夹变动 (WatchFolder)",
+      "description": "实时监视文件夹中的文件新建、修改、删除等事件，支持超时阻断等待"
     }
   }
 }

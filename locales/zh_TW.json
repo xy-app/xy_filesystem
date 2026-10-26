@@ -1,47 +1,71 @@
 {
-  "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "name": "檔案與壓縮包管理 (File & Archive)",
+  "description": "提供檔案與資料夾的新建、複製、移動、安全刪除/回收站、占用檢測、大文本讀寫、7z/Zip 打包解壓及資料夾監視功能",
   "group": "檔案系統",
   "actions": {
     "CompressFile": {
-      "display_name": "壓縮檔案 (CompressFile)",
-      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+      "display_name": "壓縮/解壓歸檔檔案 (CompressFile)",
+      "description": "對檔案或資料夾進行 7z/Zip/Tar 格式的高壓縮率打包或一鍵解壓"
     },
     "CopyFile": {
-      "display_name": "複製檔案 (CopyFile)",
-      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+      "display_name": "複製檔案/目錄 (CopyFile)",
+      "description": "複製單個檔案或將整個資料夾及其所有內容拷貝到新位置"
+    },
+    "CreateFolder": {
+      "display_name": "建立資料夾 (CreateFolder)",
+      "description": "遞歸新建指定的資料夾路徑，支援已存在時自動清空內部檔案選項"
+    },
+    "DeleteFile": {
+      "display_name": "刪除檔案/目錄 (DeleteFile)",
+      "description": "安全刪除指定檔案或資料夾，預設移入系統垃圾桶（支援強力徹底粉碎）"
     },
     "DirectoryIterator": {
-      "display_name": "走訪目錄 (DirectoryIterator)",
-      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+      "display_name": "遍歷目錄檔案 (DirectoryIterator)",
+      "description": "遍歷掃描指定資料夾下的所有檔案和子目錄列表"
+    },
+    "FileLock": {
+      "display_name": "檔案占用檢測 (FileLock)",
+      "description": "檢測檔案是否正被 Excel、Word 或其他外部進程獨占鎖定，支援超時等待解鎖"
     },
     "FileQuery": {
-      "display_name": "查詢檔案 (FileQuery)",
-      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+      "display_name": "查詢檔案屬性/匹配 (FileQuery)",
+      "description": "檢查指定檔案是否存在、查詢檔案大小和最後修改時間"
     },
     "FileRead": {
-      "display_name": "讀取檔案 (FileRead)",
-      "description": "读取指定文件的全部内容为文本或二进制数据"
+      "display_name": "讀取完整檔案 (FileRead)",
+      "description": "讀取指定檔案的全部內容為文字或二進位數據"
     },
     "FileWrite": {
-      "display_name": "寫入檔案 (FileWrite)",
-      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+      "display_name": "寫入檔案內容 (FileWrite)",
+      "description": "將文字或數據寫入儲存到指定檔案，支援覆蓋或追加寫入"
     },
     "ImageLoad": {
-      "display_name": "載入影像 (ImageLoad)",
-      "description": "从电脑本地磁盘快速读取并打开图片文件"
+      "display_name": "載入圖像數據 (ImageLoad)",
+      "description": "從電腦本地磁碟快速讀取並開啟圖片檔案"
     },
     "ImageSave": {
-      "display_name": "儲存影像 (ImageSave)",
-      "description": "将当前内存中的图片保存到本地磁盘文件中"
+      "display_name": "儲存圖像檔案 (ImageSave)",
+      "description": "將當前記憶體中的圖片儲存到本地磁碟檔案中"
+    },
+    "MoveFile": {
+      "display_name": "移動/重命名檔案 (MoveFile)",
+      "description": "將檔案或資料夾移動到新目錄或重命名，支援跨磁碟/跨卷移動"
     },
     "ReadLines": {
-      "display_name": "依行讀取 (ReadLines)",
-      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+      "display_name": "按行讀取文字 (ReadLines)",
+      "description": "將大型文字檔案按行拆解讀取為列表，方便逐行處理"
     },
     "StandardPath": {
-      "display_name": "標準路徑 (StandardPath)",
-      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+      "display_name": "取得系統標準路徑 (StandardPath)",
+      "description": "快速取得桌面、文檔、暫存目錄或使用者個人資料夾的標準路徑"
+    },
+    "TempFile": {
+      "display_name": "建立暫存檔/目錄 (TempFile)",
+      "description": "在系統暫存目錄下自動生成具備唯一名稱的暫存檔或資料夾"
+    },
+    "WatchFolder": {
+      "display_name": "監視資料夾變動 (WatchFolder)",
+      "description": "實時監視資料夾中的檔案新建、修改、刪除等事件，支援超時阻斷等待"
     }
   }
 }

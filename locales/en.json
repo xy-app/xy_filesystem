@@ -1,47 +1,71 @@
 {
-  "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "name": "File & Archive Management",
+  "description": "Provides file and directory creation, copying, moving, trash deletion, lock detection, text IO, 7z/Zip archiving, and folder monitoring.",
   "group": "Filesystem",
   "actions": {
     "CompressFile": {
       "display_name": "Compress File (CompressFile)",
-      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+      "description": "Compress or decompress files and directories using Zip, 7z, or Tar formats with optional encryption."
     },
     "CopyFile": {
       "display_name": "Copy File (CopyFile)",
-      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+      "description": "Copy a single file or recursively duplicate an entire directory tree."
+    },
+    "CreateFolder": {
+      "display_name": "Create Folder (CreateFolder)",
+      "description": "Recursively create new directories with optional cleanup if already existing."
+    },
+    "DeleteFile": {
+      "display_name": "Delete File (DeleteFile)",
+      "description": "Safely move files or folders to the system trash or permanently delete them."
     },
     "DirectoryIterator": {
       "display_name": "Iterate Directory (DirectoryIterator)",
-      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+      "description": "Scan and iterate files and subdirectories with extension wildcard filtering."
+    },
+    "FileLock": {
+      "display_name": "Check File Lock (FileLock)",
+      "description": "Detect whether a file is locked by external applications like Excel or Word, with timeout polling."
     },
     "FileQuery": {
       "display_name": "Query File (FileQuery)",
-      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+      "description": "Check file existence, file size, directory status, and last modification timestamp."
     },
     "FileRead": {
       "display_name": "Read File (FileRead)",
-      "description": "读取指定文件的全部内容为文本或二进制数据"
+      "description": "Read complete text or binary data from disk into memory."
     },
     "FileWrite": {
       "display_name": "Write File (FileWrite)",
-      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+      "description": "Save text or binary buffer content to a file on disk."
     },
     "ImageLoad": {
       "display_name": "Load Image (ImageLoad)",
-      "description": "从电脑本地磁盘快速读取并打开图片文件"
+      "description": "Load image files into memory Image objects."
     },
     "ImageSave": {
       "display_name": "Save Image (ImageSave)",
-      "description": "将当前内存中的图片保存到本地磁盘文件中"
+      "description": "Save memory Image objects or export directly as PDF files."
+    },
+    "MoveFile": {
+      "display_name": "Move File (MoveFile)",
+      "description": "Move or rename files and folders across disk drives and volumes."
     },
     "ReadLines": {
       "display_name": "Read Lines (ReadLines)",
-      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+      "description": "Split and read large text files line by line into string array lists."
     },
     "StandardPath": {
-      "display_name": "Standard Path (StandardPath)",
-      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+      "display_name": "Get Standard Path (StandardPath)",
+      "description": "Retrieve standard system directories like Desktop, Documents, Downloads, AppData, and Temp."
+    },
+    "TempFile": {
+      "display_name": "Create Temp File (TempFile)",
+      "description": "Generate unique temporary files or directories in the OS temp folder."
+    },
+    "WatchFolder": {
+      "display_name": "Watch Folder (WatchFolder)",
+      "description": "Monitor folder file creation, modification, and deletion events in real time with timeout."
     }
   }
 }

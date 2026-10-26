@@ -1,47 +1,71 @@
 {
-  "name": "文件与压缩包管理 (File & Archive)",
-  "description": "提供文件与文件夹的新建、复制、移动、删除，大文本读写，以及 7z/Zip 格式的打包与解压功能",
+  "name": "ファイル・アーカイブ管理",
+  "description": "ファイルとフォルダの作成、コピー、移動、ごみ箱削除、ロック検知、テキスト読込/書込、7z/Zip圧縮解凍、フォルダ監視機能を提供します。",
   "group": "ファイルシステム",
   "actions": {
     "CompressFile": {
       "display_name": "ファイル圧縮 (CompressFile)",
-      "description": "对文件或文件夹进行 7z/Zip/Tar 格式的高压缩率打包或一键解压"
+      "description": "Zip、7z、Tar形式での高圧縮アーカイブ作成および解凍を行います。"
     },
     "CopyFile": {
       "display_name": "ファイル複製 (CopyFile)",
-      "description": "复制单个文件或将整个文件夹及其所有内容拷贝到新位置"
+      "description": "単一ファイルまたはフォルダ全体を再帰的にコピーします。"
+    },
+    "CreateFolder": {
+      "display_name": "フォルダ作成 (CreateFolder)",
+      "description": "指定パスのフォルダを再帰的に新規作成します（既存時の自動削除オプションあり）。"
+    },
+    "DeleteFile": {
+      "display_name": "ファイル削除 (DeleteFile)",
+      "description": "ファイルまたはフォルダを安全にごみ箱へ移動するか完全削除します。"
     },
     "DirectoryIterator": {
       "display_name": "ディレクトリ一覧走査 (DirectoryIterator)",
-      "description": "遍历扫描指定文件夹下的所有文件和子目录列表"
+      "description": "フォルダ内のファイルおよびサブディレクトリ一覧をワイルドカードフィルター付きで走査します。"
+    },
+    "FileLock": {
+      "display_name": "ファイル使用中確認 (FileLock)",
+      "description": "ExcelやWordなどの外部プロセスによるファイルロック状態を検知し、解除まで待機します。"
     },
     "FileQuery": {
       "display_name": "ファイル情報取得 (FileQuery)",
-      "description": "检查指定文件是否存在、查询文件大小和最后修改时间"
+      "description": "ファイルの存在確認、サイズ、ディレクトリ判定、最終更新日時を取得します。"
     },
     "FileRead": {
       "display_name": "ファイル読込 (FileRead)",
-      "description": "读取指定文件的全部内容为文本或二进制数据"
+      "description": "指定ファイルの全内容をテキストまたはバイナリデータとして読み込みます。"
     },
     "FileWrite": {
       "display_name": "ファイル書込 (FileWrite)",
-      "description": "将文本或数据写入保存到指定文件，支持覆盖或追加写入"
+      "description": "テキストまたはバイナリデータを指定ファイルに保存します。"
     },
     "ImageLoad": {
       "display_name": "画像読込 (ImageLoad)",
-      "description": "从电脑本地磁盘快速读取并打开图片文件"
+      "description": "ローカルディスクから画像ファイルを高速に読み込みます。"
     },
     "ImageSave": {
       "display_name": "画像保存 (ImageSave)",
-      "description": "将当前内存中的图片保存到本地磁盘文件中"
+      "description": "メモリ上の画像オブジェクトを保存またはPDFとして直接出力します。"
+    },
+    "MoveFile": {
+      "display_name": "ファイル移動 (MoveFile)",
+      "description": "ファイルまたはフォルダを別の場所に移動・名前変更します（ドライブ間移動対応）。"
     },
     "ReadLines": {
       "display_name": "行単位読込 (ReadLines)",
-      "description": "将大型文本文件按行拆解读取为列表，方便逐行处理"
+      "description": "大型テキストファイルを1行ずつ分割して配列形式で読み込みます。"
     },
     "StandardPath": {
       "display_name": "システム標準パス (StandardPath)",
-      "description": "快速获取桌面、文档、临时目录或用户个人文件夹的标准路径"
+      "description": "デスクトップ、ドキュメント、ダウンロード、AppData、Tempなどの標準パスを取得します。"
+    },
+    "TempFile": {
+      "display_name": "一時ファイル作成 (TempFile)",
+      "description": "システムの一時フォルダ内にユニークな名前の一時ファイルまたはフォルダを自動生成します。"
+    },
+    "WatchFolder": {
+      "display_name": "フォルダ監視 (WatchFolder)",
+      "description": "フォルダ内の作成・変更・削除イベントをリアルタイムに監視します。"
     }
   }
 }
